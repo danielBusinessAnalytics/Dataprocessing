@@ -22,17 +22,14 @@ with open('movies.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         data_dict[row['Year']].append(float(row['Rating']))
-
-
 # stores means of the values
 for key in data_dict:
     data_dict[key] = np.mean(data_dict.get(key))
-
-
 # matplotlib plot
 plt.plot(data_dict.keys(), data_dict.values())
 # y axle is between 0 and 10
 plt.ylim(0, 10)
+# labels
 plt.title('Average movie rating')
 plt.xlabel('Year')
 plt.ylabel('Rating')

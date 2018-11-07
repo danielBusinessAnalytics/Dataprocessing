@@ -2,11 +2,9 @@
 Created on Thu Nov  1 11:47:51 2018
 
 @author: Daniel Velleman
+Student number: 10106723
 """
 
-#!/usr/bin/env python
-# Name: Daniel Velleman
-# Student number: 10106723
 """
 This script scrapes IMDB and outputs a CSV file with highest rated movies.
 """
