@@ -34,20 +34,21 @@ def extract_movies(dom):
     movies_list = []
 
     # All info from a movie is in lister-item-content
-    for movies in dom.find_all("div", class_ = "lister-item-content"):
-        actor_string = ""
+    for movies in dom.find_all('div', class_='lister-item-content'):
+        actor_string = ''
         title = movies.h3.a.string
         rating = movies.div.div.strong.string
-        year_of_release = movies.h3.find("span", class_ = "lister-item-year text-muted unbold").string[-5:-1]
+        year_of_release = movies.h3.find('span',class_='lister-item-year')\
+                                .string[-5:-1]
         actors_list = movies.select('a[href*="adv_li_st_"]')
-        runtime = int(movies.p.find("span", class_ = "runtime").string[0:-4])
+        runtime = int(movies.p.find('span', class_='runtime').string[0:-4])
         # if no actors, put 'No actors'
         if len(actors_list) == 0:
             actor_string = 'No actors  '
         # put actors_list into one actor string
         else:
             for actor in actors_list:
-                actor_string += actor.string + ", "
+                actor_string += actor.string + ', '
 
         # append every movie to the movies list
         movies_list.extend((title, rating, year_of_release, \
