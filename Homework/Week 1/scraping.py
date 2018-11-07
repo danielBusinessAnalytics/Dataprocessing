@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Thu Nov  1 11:47:51 2018
 
@@ -55,7 +54,7 @@ def extract_movies(dom):
         # append every movie to the movies list
         movies_list.extend((title, rating, year_of_release, \
                             actor_string[:-2], runtime))
-                        
+
     return movies_list
 
 
