@@ -67,11 +67,6 @@ def central_tendency(dataframe, column_name):
     print('median: ' + str(median))
     print('mode: ' + str(mode)[:10])
 
-    # Plot
-    # plt.title(column_name)
-    # plt.xlabel('Amount')
-    # plt.ylabel('Frequency')
-    # plt.hist(dataframe.loc[:,column_name])
     dataframe.hist(column=column_name)
     plt.show()
 
