@@ -6,11 +6,65 @@
     </head>
     <body>
       <script type="text/javascript">
-          d3.select("body").append("h1").text("Dataprocessing week 4")
-          d3.select("body").append("h2").text("Name: Daniel Velleman")
-          d3.select("body").append("h2").text("Student number: 10106723")
-          d3.select("head").append("title").text("D3 bar chart")
-          d3.select("body").append("p").text("This week we do some biullshit stuff")
+          d3.select("body").append("h1").text("Dataprocessing week 4").style("text-align", "center");
+          d3.select("body").append("h2").text("Name: Daniel Velleman").style("text-align", "center");
+          d3.select("body").append("h2").text("Student number: 10106723").style("text-align", "center");
+          d3.select("head").append("title").text("D3 bar chart");
+          d3.select("body").append("p")
+            .text("Percentage renewable energy of total primary energy supply in a country in the year 2016 ")
+            .style("text-align", "center");
+          //Width and height
+          var w = 800;
+          var h = 300;
+          var barPadding = 1;
+          var svg = d3.select("body")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
+
+          // Define Y axis
+          // var yAxis = d3.svg.axis()
+          //                   .scale(yScale
+          //                   .orient("left")
+          //                   .ticks(5);
+
+
+
+          // scale
+          var scale = d3.scaleLinear()
+                        .domain([0, 100])
+                        .range([0, 400]);
+
+
+          d3.json("data.json").then(function(dataset) {
+
+            // makes rectangles for the barchart
+            svg.selectAll("rect").data(dataset).enter().append("rect")
+                .attr("x", function(d, i) {return i * (w / dataset.length);})
+                .attr("y", function(d) {return h - d.value;})
+                .attr("width", w / dataset.length - barPadding)
+                .attr("height", function(d) {return d.value;})
+                .attr("fill", "teal");
+
+            // putting values at barchart
+            svg.selectAll("text")
+            .data(dataset)
+            .enter()
+            .append("text")
+            .text(function(d) {return d.value;})
+            .attr("x", function(d, i) {
+              return i * (w / dataset.length);})
+            .attr("y", function(d) {
+              return h - (d.value);});
+
+
+            // svg.append("g")
+            //     .attr("class", "axis")
+            //     .attr("transform", "translate(" + padding + ",0)")
+            //     .call(yAxis);
+
+            })
+
       </script>
     </body>
 </html>
