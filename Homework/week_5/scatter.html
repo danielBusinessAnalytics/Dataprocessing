@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" type="text/css" href="scatter.css">
         <meta charset="utf-8">
         <script type="text/javascript" src="d3/d3.js"></script>
     </head>
@@ -10,9 +11,27 @@
           d3.select("body").append("h2").text("Name: Daniel Velleman").style("text-align", "center");
           d3.select("body").append("h2").text("Student number: 10106723").style("text-align", "center");
           d3.select("head").append("title").text("D3 scatterplot");
+          d3.select("body").append("p").text("Source data: Woman in science = http://stats.oecd.org/SDMX-JSON/data/MSTI_PUB/TH_WRXRS.FRA+DEU+KOR+NLD+PRT+GBR/all?startTime=2007&endTime=2015")
+          d3.select("body").append("p").text("Source data: Consumer confidence = http://stats.oecd.org/SDMX-JSON/data/HH_DASH/FRA+DEU+KOR+NLD+PRT+GBR.COCONF.A/all?startTime=2007&endTime=2015")
       </script>
+      <div class="">
+      <div class="dropdown">
+        <button class="dropbtn">Year</button>
+        <div class="dropdown-content">
+          <a class="m" value="All" href="#">All</a>
+          <a class="m" value="0" href="#">2007</a>
+          <a class="m" value="1" href="#">2008</a>
+          <a class="m" value="2" href="#">2009</a>
+          <a class="m" value="3" href="#">2010</a>
+          <a class="m" value="4" href="#">2011</a>
+          <a class="m" value="5" href="#">2012</a>
+          <a class="m" value="6" href="#">2013</a>
+          <a class="m" value="7" href="#">2014</a>
+          <a class="m" value="8" href="#">2015</a>
+        </div>
+      </div>
+      <div class="">
       <script src="scatter.js">
-
       </script>
     </body>
 </html>
