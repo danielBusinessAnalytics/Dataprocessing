@@ -7,12 +7,11 @@ var countries_dict = {
   "United Kingdom": "33,102,172"
 };
 
-var svgWidth = 700;
+var svgWidth = 1000;
 var svgHeigth = 600;
-var paddingAxes = 30;
+var paddingAxes = 50;
 var paddingBar = 0;
-var paddingLegenda = 150;
-var width = svgWidth - paddingAxes - paddingLegenda;
+var width = svgWidth - paddingAxes;
 var height = svgHeigth - paddingAxes;
 
 window.onload = function() {
@@ -42,12 +41,6 @@ window.onload = function() {
     var wis_data = transformResponse(response[0]);
     var consConf_data = transformResponse(response[1]);
 
-    console.log(wis_data);
-    console.log(consConf_data);
-    // data_dict_dict = [ {"country":,
-    //                    "time":,
-    //                    "wisDP":,
-    //                    "coCoDP":}]
     data_dict = {};
     data_list = [];
     // make data complete
@@ -63,15 +56,6 @@ window.onload = function() {
       }
     }
 
-
-    var svgWidth = 700;
-    var svgHeigth = 600;
-    var paddingAxes = 30;
-    var paddingBar = 0;
-    var paddingLegenda = 150;
-    var width = svgWidth - paddingAxes - paddingLegenda;
-    var height = svgHeigth - paddingAxes;
-
     // consumer confidence
     var xScale = d3.scaleLinear()
                    // .domain([d3.min(data_dict1, function(d) { return d[3]; }), d3.max(data_dict1[2:], function(d) { return d[3];})])
@@ -81,15 +65,8 @@ window.onload = function() {
     // women in science
     var yScale = d3.scaleLinear()
                        // .domain([d3.min(data_dict1, function(d) { return d[2]; }), d3.max(data_dict1[2:], function(d) { return d[2];})])
-                       .domain([10, 50])
+                       .domain([0, 50])
                        .range([width, 0]);
-
-
-
-   // Color points werkt niet
-    var colorScale  = d3.scaleBand()
-                        .domain(["France", "Germany", "Korea", "Netherlands", "Portugal", "United Kingdom"])
-                        .range(["178,24,43", "239,138,98", "253,219,199", "209,229,240", "103,169,207", "33,102,172"])
 
     // createSVG(width, height);
     var svg = d3.select("body")
@@ -132,7 +109,6 @@ window.onload = function() {
     d3.selectAll(".m")
       .on("click", function(){
         var year = this.getAttribute("value")
-        console.log(year);
         if (year == "All"){
           return beginScreen();
         }
@@ -147,12 +123,7 @@ window.onload = function() {
        .data(Object.values(data_dict)[year]) // data_list["2007"]
        .enter()
        .append("circle")
-       .attr("cx", function(d) {
-        // console.log(d);
-        // return d[1]
-         // for (keys in data_dict){
-         //   return data_dict[keys]
-         // }
+       .attr("cx", function(d) {s
             return xScale(d[1]);
        })
        .attr("cy", function(d) {
@@ -161,17 +132,14 @@ window.onload = function() {
        })
        .attr("r", 10)
        .attr("fill", function(d){
-         // console.log(d);
-         // console.log(d[0]);
-         // console.log(countries_dict[(d[0])]);
           return "rgb(" + countries_dict[(d[0])] + ")";
        })
       }
 
-       // AXES
+       // Axiss
       var xAxis = svg.append("g")
                      .attr("class", "y axis")
-                     .attr("transform", "translate(50, 520)")
+                     .attr("transform", "translate(50, 530)")
                      .call(d3.axisBottom(xScale))
 
       var yAxis = svg.append("g")
@@ -255,7 +223,7 @@ function legend(svg) {
     });
 
   legend.append("rect")
-    .attr("x", width + 20)
+    .attr("x", width - 200)
     .attr("y", 0)
     .attr("width", 18)
     .attr("height", 18)
@@ -264,7 +232,7 @@ function legend(svg) {
     });
 
   legend.append("text")
-    .attr("x", width + 40)
+    .attr("x", width - 160)
     .attr("y", 15)
     .text(function(d) {
       return d;
